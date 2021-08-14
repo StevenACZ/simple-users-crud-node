@@ -5,13 +5,15 @@ const router = express.Router();
 
 let users = [
 	{
-		id: uuidv4(),
+		// id: uuidv4(),
+		id: 1,
 		firstName: 'Juan',
 		lastName: 'Doe',
 		age: 18,
 	},
 	{
-		id: uuidv4(),
+		// id: uuidv4(),
+		id: 2,
 		firstName: 'Pepe',
 		lastName: 'Alte',
 		age: 20,
@@ -48,6 +50,26 @@ router.delete('/:userId', (req, res) => {
 	users = users.filter(user => user.id !== userId);
 
 	res.send(users);
+});
+
+router.patch('/:userId', (req, res) => {
+	const { userId } = req.params;
+	const { firstName, lastName, age } = req.body;
+
+	const user = users.find(user => user.id === parseInt(userId));
+
+	if (firstName) user.firstName = firstName;
+	if (lastName) user.lastName = lastName;
+	if (age) user.age = age;
+
+	users = users.filter(user => user.id !== parseInt(userId));
+
+	users.push(user);
+
+	res.send({
+		error: false,
+		data: user,
+	});
 });
 
 export default router;
