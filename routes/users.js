@@ -22,12 +22,12 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-	console.log('POST ROUTE REACHED');
+	const newUser = req.body;
 
-	res.send({
-		error: 'false',
-		data: req.body,
-	});
+	// New user added
+	users.push(newUser);
+
+	res.send(`User with the name ${newUser.firstName} added to the database!`);
 });
 
 export default router;
