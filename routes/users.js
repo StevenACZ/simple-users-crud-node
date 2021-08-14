@@ -5,15 +5,13 @@ const router = express.Router();
 
 let users = [
 	{
-		// id: uuidv4(),
-		id: 1,
+		id: uuidv4(),
 		firstName: 'Juan',
 		lastName: 'Doe',
 		age: 18,
 	},
 	{
-		// id: uuidv4(),
-		id: 2,
+		id: uuidv4(),
 		firstName: 'Pepe',
 		lastName: 'Alte',
 		age: 20,
@@ -56,13 +54,13 @@ router.patch('/:userId', (req, res) => {
 	const { userId } = req.params;
 	const { firstName, lastName, age } = req.body;
 
-	const user = users.find(user => user.id === parseInt(userId));
+	const user = users.find(user => user.id === userId);
 
 	if (firstName) user.firstName = firstName;
 	if (lastName) user.lastName = lastName;
 	if (age) user.age = age;
 
-	users = users.filter(user => user.id !== parseInt(userId));
+	users = users.filter(user => user.id !== userId);
 
 	users.push(user);
 
