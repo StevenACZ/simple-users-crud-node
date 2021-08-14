@@ -3,11 +3,22 @@ import { v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
 
-let users = [];
+let users = [
+	{
+		id: uuidv4(),
+		firstName: 'Juan',
+		lastName: 'Doe',
+		age: 18,
+	},
+	{
+		id: uuidv4(),
+		firstName: 'Pepe',
+		lastName: 'Alte',
+		age: 20,
+	},
+];
 
-router.get('/', (req, res) => {
-	console.log(users);
-
+router.get('/', (_req, res) => {
 	res.send(users);
 });
 
