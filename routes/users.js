@@ -1,19 +1,9 @@
 import express from 'express';
+import { v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
 
-const users = [
-	{
-		firstName: 'John',
-		lastName: 'Doe',
-		age: 25,
-	},
-	{
-		firstName: 'Jane',
-		lastName: 'Doe',
-		age: 23,
-	},
-];
+const users = [];
 
 router.get('/', (req, res) => {
 	console.log(users);
@@ -22,7 +12,10 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-	const newUser = req.body;
+	const newUser = {
+		id: uuidv4(),
+		...req.body,
+	};
 
 	// New user added
 	users.push(newUser);
